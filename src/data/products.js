@@ -1,0 +1,151 @@
+/* ------------------------------------------------------------------ */
+/*  Products                                                           */
+/*  To add a soap: drop its photo in /public/products and add an       */
+/*  entry below. The shop, product page and cart pick it up.           */
+/* ------------------------------------------------------------------ */
+
+export const collections = [
+  { id: 'all', label: 'All soaps' },
+  { id: 'Signature', label: 'Signature' },
+  { id: 'Lucky charm', label: 'Lucky charms' },
+  { id: 'Gift-ready', label: 'Gift-ready' },
+  { id: 'Bestie bears', label: 'Bestie bears' },
+  { id: 'Personalised', label: 'Personalised' },
+]
+
+export const products = [
+  {
+    id: 'name-bouquet-box',
+    tint: 'var(--tint-bloom)',
+    name: 'Personalised Name Bouquet',
+    variant: 'Clear gift box',
+    tag: 'Personalised',
+    isNew: true,
+    price: 650,
+    desc: 'Their name spelled out in colourful soap letters, with a bestie bear and sweet treats — in a clear gift box.',
+    longDesc:
+      'A gift that is unmistakably theirs. Every letter of the name is hand-made in soap, set on sticks like a little bouquet, and packed with a bestie bear and sweet treats in a clear gift box. Made to order for birthdays, baby showers, return gifts and every "just because".',
+    note: 'Made to order — the bouquet contents and colours may vary slightly from the photo. Longer names? Message us.',
+    personalise: { label: 'Name on the bouquet', placeholder: 'e.g. KABEER', maxLength: 10 },
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819102/sabun/products/name-bouquet-box.jpg',
+    alt: 'Personalised Name Bouquet — colourful soap letters spelling a name in a clear gift box with a blue bear soap',
+    width: 960,
+    height: 1280,
+    photo: true,
+  },
+  {
+    id: 'name-bouquet-tray',
+    tint: 'var(--tint-bloom)',
+    name: 'Personalised Name Bouquet',
+    variant: 'Pink tray box',
+    tag: 'Personalised',
+    isNew: true,
+    price: 650,
+    desc: 'A name in bold soap letters with soap roses, a bestie bear and treats, arranged in a pink tray box.',
+    longDesc:
+      'Bold soap letters spell out the name, surrounded by hand-sculpted soap roses, a bestie bear and sweet treats, all arranged in a pink tray box. It looks like a bouquet, gifts like a hamper, and every piece is made by hand for the person receiving it.',
+    note: 'Made to order — the bouquet contents and colours may vary slightly from the photo. Longer names? Message us.',
+    personalise: { label: 'Name on the bouquet', placeholder: 'e.g. AISH', maxLength: 10 },
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819104/sabun/products/name-bouquet-tray.jpg',
+    thumb: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819103/sabun/products/name-bouquet-tray-card.jpg',
+    alt: 'Personalised Name Bouquet — pink soap letters spelling a name with soap roses and a bear in a pink tray box',
+    width: 1600,
+    height: 1200,
+    photo: true,
+  },
+  {
+    id: 'forever-bloom',
+    tint: 'var(--tint-bloom)',
+    name: 'Forever Bloom',
+    variant: 'Sculpted rose',
+    tag: 'Signature',
+    price: 100,
+    desc: 'A rose in full bloom — swirls of magenta, a soft floral finish and a lather that feels like a tiny luxury.',
+    longDesc:
+      'Forever Bloom is the piece that started it all. Each rose is sculpted petal by petal, so no two are ever quite the same. It sits beautifully on a soap dish, slips easily into a gift box, and lathers into something soft and creamy when you finally can bear to use it.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819100/sabun/products/forever-bloom.jpg',
+    alt: 'Forever Bloom — a hand-sculpted magenta rose soap',
+    width: 1239,
+    height: 1270,
+  },
+  {
+    id: 'evil-eye-talisman',
+    tint: 'var(--tint-talisman)',
+    name: 'Evil Eye',
+    variant: 'Gold shimmer talisman',
+    tag: 'Lucky charm',
+    price: 150,
+    desc: 'A shimmering gold eye talisman, hand-finished to keep the good vibes close. Equal parts charm and creamy cleanse.',
+    longDesc:
+      'A little protection for your sink. The gold shimmer talisman is hand-finished with a glossy eye at its centre — a lovely housewarming gift, a good-luck token, or simply a reminder to keep the good vibes close.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819099/sabun/products/evil-eye-talisman.jpg',
+    alt: 'Evil Eye — a gold shimmer eye-shaped soap talisman',
+    width: 1536,
+    height: 1024,
+  },
+  {
+    id: 'love-rides-camera',
+    tint: 'var(--tint-camera)',
+    name: 'Love Rides',
+    variant: 'Vintage camera',
+    tag: 'Gift-ready',
+    price: 100,
+    desc: 'A glossy teal camera for the memory-keeper in your life. Small enough to gift, pretty enough to display.',
+    longDesc:
+      'For the friend who always has a camera out. This glossy teal vintage camera is sculpted down to the lens and shutter — small enough to tuck into a card, pretty enough to keep on a shelf.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819101/sabun/products/love-rides-camera.jpg',
+    alt: 'Love Rides — a glossy teal vintage camera-shaped soap',
+    width: 1536,
+    height: 1024,
+  },
+  {
+    id: 'love-rides-bus',
+    tint: 'var(--tint-bus)',
+    name: 'Love Rides',
+    variant: 'Caramel toy bus',
+    tag: 'Gift-ready',
+    price: 100,
+    desc: 'A caramel toy bus with all the vintage charm. A tiny joyride for your sink, your shelf or a gift box.',
+    longDesc:
+      'A caramel toy bus straight out of a childhood memory. It is the piece people pick up and smile at — perfect for travellers, dreamers, and anyone who loves a good road trip.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819100/sabun/products/love-rides-bus.jpg',
+    alt: 'Love Rides — a glossy caramel toy bus-shaped soap',
+    width: 1600,
+    height: 800,
+  },
+  {
+    id: 'evil-eye-gems',
+    tint: 'var(--tint-gems)',
+    name: 'Evil Eye',
+    variant: 'Gems on a gold plate',
+    tag: 'Lucky charm',
+    price: 150,
+    desc: 'A golden plate of glossy evil-eye gems — a protective little set that looks as good as it cleans.',
+    longDesc:
+      'A golden plate set with glossy evil-eye gems. It works as a little centrepiece for your washroom and a thoughtful gift for a new home, a new job or a new beginning.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819098/sabun/products/evil-eye-gems.jpg',
+    alt: 'Evil Eye — glossy evil-eye soap gems arranged on a gold plate',
+    width: 1199,
+    height: 1312,
+  },
+  {
+    id: 'bestie-bears',
+    tint: 'var(--tint-bears)',
+    name: 'Bestie Bears',
+    variant: 'Hand-sculpted bears',
+    tag: 'Bestie bears',
+    price: 85,
+    priceNote: 'each',
+    desc: 'Palm-sized bestie bears, sold separately so nobody has to share. Pick a colour, gift a pair, spread the love.',
+    longDesc:
+      'Palm-sized bears, sold one at a time so you can build the perfect pair (or a whole gang). Want a particular colour? Mention it in the order notes at checkout and we will do our best to match.',
+    note: 'Want a specific colour? Add it in the order notes at checkout.',
+    img: 'https://res.cloudinary.com/kkocbepk/image/upload/v1794819097/sabun/products/bestie-bears.jpg',
+    alt: 'Bestie Bears — a pair of handcrafted bear-shaped soaps',
+    width: 1200,
+    height: 1600,
+    photo: true,
+  },
+]
+
+export const getProduct = (id) => products.find((product) => product.id === id)
