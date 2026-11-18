@@ -25,11 +25,11 @@ export default function AddProduct() {
     try {
       await api.post('/admin/products', formToPayload(form))
       await refresh()
-      navigate('/admin/products', { replace: true, state: { message: `Created “${form.name}”` } })
+      navigate('/sabun-admin/products', { replace: true, state: { message: `Created “${form.name}”` } })
     } catch (err) {
       if (err?.name === 'SessionExpiredError' || err?.status === 401) {
         logout()
-        navigate('/admin/login', { replace: true })
+        navigate('/sabun-admin/login', { replace: true })
         return
       }
       setError(err.message)
@@ -46,7 +46,7 @@ export default function AddProduct() {
         setForm={setForm}
         busy={busy}
         onSubmit={onSubmit}
-        onCancel={() => navigate('/admin/products')}
+        onCancel={() => navigate('/sabun-admin/products')}
       />
     </div>
   )

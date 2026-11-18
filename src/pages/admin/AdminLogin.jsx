@@ -16,7 +16,7 @@ export default function AdminLogin() {
   const [busy, setBusy] = useState(false)
   usePageTitle('Admin login')
 
-  if (!loading && user?.role === 'admin') return <Navigate to="/admin" replace />
+  if (!loading && user?.role === 'admin') return <Navigate to="/sabun-admin" replace />
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -29,7 +29,7 @@ export default function AdminLogin() {
         setError('This account does not have admin access.')
         return
       }
-      navigate('/admin', { replace: true })
+      navigate('/sabun-admin', { replace: true })
     } catch (err) {
       setError(err.message || 'Login failed')
     } finally {

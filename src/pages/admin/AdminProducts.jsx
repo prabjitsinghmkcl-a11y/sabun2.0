@@ -115,12 +115,12 @@ export default function AdminProducts() {
     }
   }
 
-  const editHref = (p) => `/admin/edit-product/${encodeURIComponent(p.id)}`
+  const editHref = (p) => `/sabun-admin/edit-product/${encodeURIComponent(p.id)}`
 
   return (
     <div>
       <PageHead eyebrow="Catalogue" title="Products" sub={`${products.length} soap${products.length === 1 ? '' : 's'} in the shop. Changes go live the moment you save.`}>
-        <Link to="/admin/add-product" className="sb-btn sb-btn--primary">
+        <Link to="/sabun-admin/add-product" className="sb-btn sb-btn--primary">
           <Plus size={16} /> Add product
         </Link>
       </PageHead>
@@ -170,7 +170,7 @@ export default function AdminProducts() {
         <div className="sb-card">
           <Empty icon={Package} title={products.length ? 'No matches' : 'No products yet'}>
             {products.length ? 'Try a different search or filter.' : 'Add your first soap to start selling.'}
-            {!products.length && <Link to="/admin/add-product" className="sb-btn sb-btn--primary"><Plus size={16} /> Add product</Link>}
+            {!products.length && <Link to="/sabun-admin/add-product" className="sb-btn sb-btn--primary"><Plus size={16} /> Add product</Link>}
           </Empty>
         </div>
       )}

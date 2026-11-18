@@ -140,7 +140,7 @@ export default function ProductForm({ form, setForm, editing, busy, onSubmit, on
 
   return (
     <form onSubmit={onSubmit} noValidate={false}>
-      <Link to="/admin/products" className="sb-link" style={{ marginBottom: 14 }}>
+      <Link to="/sabun-admin/products" className="sb-link" style={{ marginBottom: 14 }}>
         <ArrowLeft size={15} /> All products
       </Link>
       <PageHead

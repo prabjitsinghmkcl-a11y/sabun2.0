@@ -90,9 +90,9 @@ export default function AdminDashboard() {
           </p>
         </div>
         <div className="sb-hero-actions">
-          <Todo count={counts.pending || 0} label="New orders to confirm" to="/admin/orders?status=pending" />
-          <Todo count={counts.paid || 0} label="Paid — ready to ship" to="/admin/orders?status=paid" />
-          <Todo count={lowStock.length} label="Products running low" to="/admin/products?stock=low" />
+          <Todo count={counts.pending || 0} label="New orders to confirm" to="/sabun-admin/orders?status=pending" />
+          <Todo count={counts.paid || 0} label="Paid — ready to ship" to="/sabun-admin/orders?status=paid" />
+          <Todo count={lowStock.length} label="Products running low" to="/sabun-admin/products?stock=low" />
         </div>
       </section>
 
@@ -104,7 +104,7 @@ export default function AdminDashboard() {
           tone="butter"
           label="Orders"
           icon={ShoppingBag}
-          to="/admin/orders"
+          to="/sabun-admin/orders"
           value={data ? data.totalOrders : '—'}
           sub={thisMonth ? `${thisMonth.orders || 0} paid this month` : ' '}
         />
@@ -112,11 +112,11 @@ export default function AdminDashboard() {
           tone="sage"
           label="Products"
           icon={Package}
-          to="/admin/products"
+          to="/sabun-admin/products"
           value={data ? data.totalProducts : '—'}
           sub={data ? (lowStock.length ? `${lowStock.length} low on stock` : 'Stock looks healthy') : ' '}
         />
-        <Kpi tone="sky" label="Customers" icon={Users} to="/admin/users" value={data ? data.totalUsers : '—'} sub="Registered accounts" />
+        <Kpi tone="sky" label="Customers" icon={Users} to="/sabun-admin/users" value={data ? data.totalUsers : '—'} sub="Registered accounts" />
       </div>
 
       <div className="sb-dash">
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
                 <h2>Latest orders</h2>
                 <p>The five most recent orders from the shop</p>
               </div>
-              <Link to="/admin/orders" className="sb-link">All orders <ArrowUpRight size={15} /></Link>
+              <Link to="/sabun-admin/orders" className="sb-link">All orders <ArrowUpRight size={15} /></Link>
             </div>
             {data && !data.recentOrders?.length && (
               <Empty icon={ShoppingBag} title="No orders yet">Orders placed at checkout will show up here.</Empty>
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
             <ul className="sb-list">
               {(data?.recentOrders || []).map((order) => (
                 <li key={order._id}>
-                  <Link to="/admin/orders" state={{ highlightId: order._id }} className="sb-row">
+                  <Link to="/sabun-admin/orders" state={{ highlightId: order._id }} className="sb-row">
                     <span className="sb-ref">#{String(order.ref || '').slice(-3)}</span>
                     <span className="sb-row-main">
                       <strong>{order.customer?.name || 'Customer'}</strong>
@@ -189,7 +189,7 @@ export default function AdminDashboard() {
             </div>
             <div className="sb-legend">
               {STATUSES.map((s) => (
-                <Link key={s} to={`/admin/orders?status=${s}`} style={{ '--c': STATUS_COLOR[s] }}>
+                <Link key={s} to={`/sabun-admin/orders?status=${s}`} style={{ '--c': STATUS_COLOR[s] }}>
                   <i /> {s} <b className="sb-num">{counts[s] || 0}</b>
                 </Link>
               ))}
@@ -202,7 +202,7 @@ export default function AdminDashboard() {
                 <h2>Running low</h2>
                 <p>10 or fewer left in stock</p>
               </div>
-              <Link to="/admin/products" className="sb-link">Products <ArrowUpRight size={15} /></Link>
+              <Link to="/sabun-admin/products" className="sb-link">Products <ArrowUpRight size={15} /></Link>
             </div>
             {data && !lowStock.length && (
               <Empty icon={CheckCircle2} title="All stocked up">Nothing is running low right now.</Empty>
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
                 const left = Number(p.stock) || 0
                 return (
                   <li key={p.id}>
-                    <Link to={`/admin/edit-product/${encodeURIComponent(p.id)}`} className="sb-row">
+                    <Link to={`/sabun-admin/edit-product/${encodeURIComponent(p.id)}`} className="sb-row">
                       {(p.thumb || p.img) ? <img className="sb-thumb" src={p.thumb || p.img} alt="" /> : <span className="sb-thumb" />}
                       <span className="sb-row-main">
                         <strong>{p.name}</strong>

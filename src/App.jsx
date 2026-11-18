@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -26,8 +26,15 @@ import AdminSettings from './pages/admin/AdminSettings'
 function RequireAdmin({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <div className="section"><div className="container">Loading...</div></div>
-  if (!user || user.role !== 'admin') return <Navigate to="/admin/login" replace />
+  if (!user || user.role !== 'admin') return <Navigate to="/sabun-admin/login" replace />
   return children
+}
+
+// Old /admin links keep working and land on the new address.
+function LegacyAdminRedirect() {
+  const location = useLocation()
+  const rest = location.pathname.slice('/admin'.length)
+  return <Navigate to={`/sabun-admin${rest}${location.search}`} replace />
 }
 
 export default function App() {
@@ -54,9 +61,9 @@ export default function App() {
                   </Route>
                   <Route path="*" element={<NotFound />} />
                 </Route>
-                <Route path="admin/login" element={<AdminLogin />} />
+                <Route path="sabun-admin/login" element={<AdminLogin />} />
                 <Route
-                  path="admin"
+                  path="sabun-admin"
                   element={
                     <RequireAdmin>
                       <AdminLayout />
@@ -71,6 +78,7 @@ export default function App() {
                   <Route path="users" element={<AdminUsers />} />
                   <Route path="settings" element={<AdminSettings />} />
                 </Route>
+                <Route path="admin/*" element={<LegacyAdminRedirect />} />
               </Routes>
             </BrowserRouter>
           </CartProvider>

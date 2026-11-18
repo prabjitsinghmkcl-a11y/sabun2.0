@@ -90,7 +90,7 @@ export default function AdminOrderToasts({ onPendingCount }) {
           type="button"
           className="sb-toast"
           onClick={() => {
-            navigate('/admin/orders', { state: { highlightId: toast.id } })
+            navigate('/sabun-admin/orders', { state: { highlightId: toast.id } })
             setToasts((list) => list.filter((t) => t.id !== toast.id))
           }}
         >

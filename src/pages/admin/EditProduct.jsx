@@ -47,11 +47,11 @@ export default function EditProduct() {
     try {
       await api.put(`/admin/products/${encodeURIComponent(id)}`, formToPayload(form))
       await refresh()
-      navigate('/admin/products', { replace: true, state: { message: `Updated “${form.name}”` } })
+      navigate('/sabun-admin/products', { replace: true, state: { message: `Updated “${form.name}”` } })
     } catch (err) {
       if (err?.name === 'SessionExpiredError' || err?.status === 401) {
         logout()
-        navigate('/admin/login', { replace: true })
+        navigate('/sabun-admin/login', { replace: true })
         return
       }
       setError(err.message)
@@ -68,7 +68,7 @@ export default function EditProduct() {
     return (
       <div className="sb-card sb-pad">
         <Alert>{error}</Alert>
-        <Link to="/admin/products" className="sb-btn">← Back to products</Link>
+        <Link to="/sabun-admin/products" className="sb-btn">← Back to products</Link>
       </div>
     )
   }
@@ -82,7 +82,7 @@ export default function EditProduct() {
         editing
         busy={busy}
         onSubmit={onSubmit}
-        onCancel={() => navigate('/admin/products')}
+        onCancel={() => navigate('/sabun-admin/products')}
       />
     </div>
   )

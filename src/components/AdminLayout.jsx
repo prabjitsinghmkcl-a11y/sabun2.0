@@ -21,16 +21,16 @@ import { initials } from '../pages/admin/ui'
 import '../pages/admin/admin.css'
 
 const nav = [
-  { to: '/admin', label: 'Overview', icon: Home, end: true },
-  { to: '/admin/orders', label: 'Orders', icon: ShoppingBag, badge: true },
-  { to: '/admin/products', label: 'Products', icon: Package },
-  { to: '/admin/users', label: 'Customers', icon: Users },
-  { to: '/admin/settings', label: 'Settings', icon: Settings },
+  { to: '/sabun-admin', label: 'Overview', icon: Home, end: true },
+  { to: '/sabun-admin/orders', label: 'Orders', icon: ShoppingBag, badge: true },
+  { to: '/sabun-admin/products', label: 'Products', icon: Package },
+  { to: '/sabun-admin/users', label: 'Customers', icon: Users },
+  { to: '/sabun-admin/settings', label: 'Settings', icon: Settings },
 ]
 
 function pageName(pathname) {
-  if (pathname.startsWith('/admin/add-product')) return ['Products', 'New product']
-  if (pathname.startsWith('/admin/edit-product')) return ['Products', 'Edit product']
+  if (pathname.startsWith('/sabun-admin/add-product')) return ['Products', 'New product']
+  if (pathname.startsWith('/sabun-admin/edit-product')) return ['Products', 'Edit product']
   const hit = [...nav].reverse().find((n) => (n.end ? pathname === n.to || pathname === `${n.to}/` : pathname.startsWith(n.to)))
   return [hit?.label || 'Overview']
 }
@@ -45,9 +45,9 @@ function CommandPalette({ open, onClose, logout }) {
   const commands = useMemo(
     () => [
       ...nav.map((n) => ({ group: 'Go to', label: n.label, icon: n.icon, run: () => navigate(n.to) })),
-      { group: 'Go to', label: 'Pending orders', icon: ShoppingBag, run: () => navigate('/admin/orders?status=pending') },
-      { group: 'Go to', label: 'Paid orders (ready to ship)', icon: ShoppingBag, run: () => navigate('/admin/orders?status=paid') },
-      { group: 'Actions', label: 'Add a new product', icon: Plus, run: () => navigate('/admin/add-product') },
+      { group: 'Go to', label: 'Pending orders', icon: ShoppingBag, run: () => navigate('/sabun-admin/orders?status=pending') },
+      { group: 'Go to', label: 'Paid orders (ready to ship)', icon: ShoppingBag, run: () => navigate('/sabun-admin/orders?status=paid') },
+      { group: 'Actions', label: 'Add a new product', icon: Plus, run: () => navigate('/sabun-admin/add-product') },
       { group: 'Actions', label: 'Open the shop', icon: ExternalLink, run: () => window.open('/', '_blank', 'noopener') },
       { group: 'Actions', label: 'Sign out', icon: LogOut, run: logout },
     ],
@@ -163,7 +163,7 @@ function MeMenu({ user, logout }) {
           <a href="/" target="_blank" rel="noopener noreferrer" role="menuitem">
             <ExternalLink size={15} /> Open the shop
           </a>
-          <Link to="/admin/settings" role="menuitem">
+          <Link to="/sabun-admin/settings" role="menuitem">
             <Settings size={15} /> Site settings
           </Link>
           <button type="button" className="is-danger" onClick={logout} role="menuitem">
@@ -216,7 +216,7 @@ export default function AdminLayout() {
   return (
     <div className={`sb sb-shell${drawer ? ' is-drawer' : ''}`}>
       <aside className="sb-side" aria-label="Admin navigation">
-        <Link to="/admin" className="sb-logo" aria-label="SaBun admin home">
+        <Link to="/sabun-admin" className="sb-logo" aria-label="SaBun admin home">
           <span className="sb-logo-mark">S</span>
           <span>
             <b>SaBun</b>
@@ -224,7 +224,7 @@ export default function AdminLayout() {
           </span>
         </Link>
 
-        <Link to="/admin/add-product" className="sb-btn sb-btn--primary sb-btn--new">
+        <Link to="/sabun-admin/add-product" className="sb-btn sb-btn--primary sb-btn--new">
           <Plus size={16} /> New product
         </Link>
 
