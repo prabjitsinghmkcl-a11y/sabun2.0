@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router'
+import { BrowserRouter, HashRouter, Navigate, Route, Routes, useLocation } from 'react-router'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -29,6 +29,10 @@ const adminHost = (import.meta.env.VITE_ADMIN_HOST || '').trim().toLowerCase()
 const adminAllowed = adminHost
   ? window.location.hostname.toLowerCase() === adminHost
   : import.meta.env.DEV
+
+// The admin-only build drops the storefront (including customer OTP login).
+const adminOnly = import.meta.env.VITE_ADMIN_ONLY === 'true'
+const Router = import.meta.env.VITE_HASH_ROUTER === 'true' ? HashRouter : BrowserRouter
 
 function RequireAdmin({ children }) {
   const { user, loading } = useAuth()
@@ -73,27 +77,35 @@ export default function App() {
       <SiteProvider>
         <ProductsProvider>
           <CartProvider>
-            <BrowserRouter>
+            <Router>
               <Routes>
-                <Route element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="shop" element={<Shop />} />
-                  <Route path="product/:id" element={<Product />} />
-                  <Route path="cart" element={<Cart />} />
-                  <Route path="checkout" element={<Checkout />} />
-                  <Route path="order-sent" element={<OrderSent />} />
-                  <Route path="account/login" element={<AccountLogin />} />
-                  <Route path="account" element={<Account />}>
-                    <Route index element={<AccountOverview />} />
-                    <Route path="orders" element={<AccountOrders />} />
-                    <Route path="addresses" element={<AccountAddresses />} />
-                    <Route path="profile" element={<AccountProfile />} />
+                {!adminOnly && (
+                  <Route element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="shop" element={<Shop />} />
+                    <Route path="product/:id" element={<Product />} />
+                    <Route path="cart" element={<Cart />} />
+                    <Route path="checkout" element={<Checkout />} />
+                    <Route path="order-sent" element={<OrderSent />} />
+                    <Route path="account/login" element={<AccountLogin />} />
+                    <Route path="account" element={<Account />}>
+                      <Route index element={<AccountOverview />} />
+                      <Route path="orders" element={<AccountOrders />} />
+                      <Route path="addresses" element={<AccountAddresses />} />
+                      <Route path="profile" element={<AccountProfile />} />
+                    </Route>
+                    <Route path="*" element={<NotFound />} />
                   </Route>
-                  <Route path="*" element={<NotFound />} />
-                </Route>
+                )}
                 {adminRoutes}
+                {adminOnly && (
+                  <Route
+                    path="*"
+                    element={adminAllowed ? <Navigate to="/sabun-admin" replace /> : <NotFound />}
+                  />
+                )}
               </Routes>
-            </BrowserRouter>
+            </Router>
           </CartProvider>
         </ProductsProvider>
       </SiteProvider>
