@@ -23,6 +23,13 @@ import AdminOrders from './pages/admin/AdminOrders'
 import AdminUsers from './pages/admin/AdminUsers'
 import AdminSettings from './pages/admin/AdminSettings'
 
+// The admin console is host-gated: it never renders on the public storefront
+// domain. In production set VITE_ADMIN_HOST to the admin-only hostname.
+const adminHost = (import.meta.env.VITE_ADMIN_HOST || '').trim().toLowerCase()
+const adminAllowed = adminHost
+  ? window.location.hostname.toLowerCase() === adminHost
+  : import.meta.env.DEV
+
 function RequireAdmin({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <div className="section"><div className="container">Loading...</div></div>
@@ -38,6 +45,29 @@ function LegacyAdminRedirect() {
 }
 
 export default function App() {
+  const adminRoutes = adminAllowed ? (
+    <>
+      <Route path="sabun-admin/login" element={<AdminLogin />} />
+      <Route
+        path="sabun-admin"
+        element={
+          <RequireAdmin>
+            <AdminLayout />
+          </RequireAdmin>
+        }
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="products" element={<AdminProducts />} />
+        <Route path="add-product" element={<AddProduct />} />
+        <Route path="edit-product/:id" element={<EditProduct />} />
+        <Route path="orders" element={<AdminOrders />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="settings" element={<AdminSettings />} />
+      </Route>
+      <Route path="admin/*" element={<LegacyAdminRedirect />} />
+    </>
+  ) : null
+
   return (
     <AuthProvider>
       <SiteProvider>
@@ -61,24 +91,7 @@ export default function App() {
                   </Route>
                   <Route path="*" element={<NotFound />} />
                 </Route>
-                <Route path="sabun-admin/login" element={<AdminLogin />} />
-                <Route
-                  path="sabun-admin"
-                  element={
-                    <RequireAdmin>
-                      <AdminLayout />
-                    </RequireAdmin>
-                  }
-                >
-                  <Route index element={<AdminDashboard />} />
-                  <Route path="products" element={<AdminProducts />} />
-                  <Route path="add-product" element={<AddProduct />} />
-                  <Route path="edit-product/:id" element={<EditProduct />} />
-                  <Route path="orders" element={<AdminOrders />} />
-                  <Route path="users" element={<AdminUsers />} />
-                  <Route path="settings" element={<AdminSettings />} />
-                </Route>
-                <Route path="admin/*" element={<LegacyAdminRedirect />} />
+                {adminRoutes}
               </Routes>
             </BrowserRouter>
           </CartProvider>
